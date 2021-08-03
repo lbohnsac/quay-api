@@ -26,7 +26,7 @@ Success is HTTP `200`
 
 ### Delete the organization `orga`
 ```
-curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/deleteme | jq
+curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga | jq
 ```
 Success is HTTP `204`, no success is HTTP `403`
 
