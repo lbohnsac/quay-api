@@ -33,7 +33,7 @@ Success is HTTP `204`, no success is HTTP `403`
 
 
 ## Repositories
-List all existing repositories in organization `orga`
+### List all existing repositories in organization `orga`
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository?namespace=orga | jq
 ```
