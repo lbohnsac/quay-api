@@ -6,6 +6,7 @@ export bearer_token=XXXXXXXXXXXXXXXX
 export quay_registry=REGISTRY_FQDN_OR_IP
 ```
 
+
 ## Organizations (Namespaces)
 ### List all existing `organizations`
 ```
@@ -28,6 +29,8 @@ Success is HTTP `200`
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/deleteme | jq
 ```
 Success is HTTP `204`, no success is HTTP `403`
+
+
 
 ## Repositories
 List all existing repositories in organization `orga`
@@ -71,6 +74,8 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registr
 ```
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/team/orgateam | jq
 ```
+
+
 ## Users
 ### Get all existing users
 ```
