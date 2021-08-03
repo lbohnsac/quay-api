@@ -37,6 +37,12 @@ List all existing repositories in organization `orga`
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository?namespace=orga | jq
 ```
+### Change the visibility of the repository `repo` within the organization `orga` to `public`
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/changevisibility -H "Content-Type: application/json" --data '{"visibility": "public"}' | jq
+```
+Success is HTTP `200`, no success is HTTP `400`
+Valid values are `public` or `private`
 ## Teams
 ### List all teams within organization `orga`
 ```
