@@ -47,11 +47,19 @@ Valid values are `public` or `private`
 
 ##### Change the Repository state to `Readonly` for repository `repo` within organization `orga`
 ```
-curl -v -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/changestate -H "Content-Type: application/json" --data '{"state": "READ_ONLY"}' | jq
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/changestate -H "Content-Type: application/json" --data '{"state": "READ_ONLY"}' | jq
 ```
 Success is HTTP `200`
 
 Valid values are `NORMAL`, `READ_ONLY` and `MIRROR`... take care it's case sensitive!
+##### Initiate a mirror sync action of the mirrored repository `mirrorrepo`
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/mirrorrepo/sync-now | jq
+```
+##### Get the existing mirror config from the repository `mirrorrepo`
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/mirrorrepo/mirror | jq
+```
 
 
 
