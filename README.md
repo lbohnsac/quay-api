@@ -123,3 +123,48 @@ Success is HTTP `200`, no success is HTTP `404`
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/users/abc | jq
 ```
 Success is HTTP `200`, no success is HTTP `404`
+
+
+
+## Robots
+##### Create the robot `robby` within the organization `orga`
+```
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/robots/robby | jq
+```
+Success is HTTP `201`, no success is HTTP `400`
+##### List all existing robots with in the organization `orga`
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/robots | jq
+```
+Success is HTTP `200`
+
+All robots and their tokens are listed
+##### Replace the current token of robot `robby` with a new token
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/robots/robby/regenerate | jq
+```
+Success is HTTP `200`
+
+This will delete the old token and all current logins of this robot will become invalid immediately
+##### Set the permission `write` to robot `robby` for repository `repo` within organization `orga`
+```
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/permissions/user/orga+robby -H "Content-Type: application/json" --data '{"role": "write"}' | jq
+```
+Success is HTTP `200`, no success is HTTP `400`
+
+Valid values are `read`, `write` and `admin`
+##### Get information about robot `robby` (including the robbot token)
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/robots/robby | jq
+```
+Success is HTTP `200`, no success is HTTP `400`
+##### Get the current permissions of robot `robby` within the organization `orga`
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/robots/robby/permissions | jq
+```
+Success is HTTP `200`, no success is HTTP `400`
+##### Delete the current permission for the robot `robby` for repository `repo` within organization `orga`
+```
+curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/permissions/user/orga+robby | jq
+```
+Success is HTTP `204`, no success is HTTP `400`
