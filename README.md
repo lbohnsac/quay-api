@@ -44,6 +44,9 @@ curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}
 Success is HTTP `200`, no success is HTTP `400`
 
 Valid values are `public` or `private`
+
+
+
 ## Teams
 ### List all teams within organization `orga`
 ```
@@ -53,7 +56,7 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/
 ```
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/team/orgateam -H "Content-Type: application/json" --data '{"name": "orgateam", "role": "member", "description": "Orgateam"}' | jq
 ```
-### Add the repository `repo` within the organization `orga` to the team `orgateam` with role `read`
+### Add to the repository `repo` within the organization `orga` the team `orgateam` with role `read`
 ```
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/permissions/team/orgateam -H "Content-Type: application/json" --data '{"role": "read"}' | jq
 ```
@@ -61,7 +64,7 @@ curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/
 ```
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/permissions/team/orgateam -H "Content-Type: application/json" --data '{"role": "write"}' | jq
 ```
-### Remove the repository `repo` within the organization `orga` from the team `orgateam`
+### Remove from the repository `repo` within the organization `orga` the team `orgateam`
 ```
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/permissions/team/orgateam | jq
 ```
@@ -69,7 +72,7 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registr
 ```
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/team/orgateam/members/abc | jq
 ```
-### Get all members of team `orgateam` in organization `orga`
+### Get all members of the team `orgateam` in organization `orga`
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/team/orgateam/members | jq
 ```
@@ -83,12 +86,12 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registr
 ```
 
 
+
 ## Users
 ### Get all existing users
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/users/ | jq
 ```
-
 ### Create a user `abc` with email `abc@abc.com`
 ```
 curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/users/ -H "Content-Type: application/json" --data '{"username": "abc", "email": "abc@abc.com"}' | jq
