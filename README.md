@@ -52,16 +52,34 @@ curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/
 Success is HTTP `200`
 
 Valid values are `NORMAL`, `READ_ONLY` and `MIRROR`... take care it's case sensitive!
-##### Initiate a mirror sync action of the mirrored repository `mirrorrepo`
-```
-curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/mirrorrepo/sync-now | jq
-```
+
+
+### Mirrored repositories
 ##### Get the existing mirror config from the repository `mirrorrepo`
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/mirrorrepo/mirror | jq
 ```
+##### Update the full mirror config of the mirrored repository `mirrorrepo` within the organization `orga` (docker.io/minio/mc:latest)
+The used robor `orga+robot` must already exist!
 
-
+Required values to provide are
+- external_reference
+- sync_interval
+- sync_start_date
+- root_rule
+```
+curl -v -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/mirrorrepo/mirror -H "Content-Type: application/json" --data '{"is_enabled": true, "external_reference": "docker.io/minio/mc", "external_registry_username": "", "external_registry_config": {"verify_tls": false,"proxy": {"http_proxy": "", "https_proxy": "", "no_proxy": ""}},"sync_interval": 600, "sync_start_date": "2021-08-06T11:11:39Z", "sync_expiration_date": "2021-08-07T11:18:29Z", "root_rule": {"rule_kind": "tag_glob_csv", "rule_value": [ "latest" ]}, "robot_username": "orga+robot"}' | jq
+```
+##### Update a part of the mirror config of the mirrored repository `mirrorrepo` within the organization `orga` (docker.io/minio/mc:latest)
+Here only the sync interval will be updated
+```
+curl -v -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/ansiblemirror/mirror -H "Content-Type: application/json" --data '{"sync_interval": 1260}' | jq
+```
+Success is HTTP `201`
+##### Initiate a mirror sync action of the mirrored repository `mirrorrepo`
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/mirrorrepo/sync-now | jq
+```
 
 ## Teams
 ##### List all teams within organization `orga`
