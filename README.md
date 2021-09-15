@@ -60,7 +60,7 @@ Valid values are `NORMAL`, `READ_ONLY` and `MIRROR`... take care it's case sensi
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/mirrorrepo/mirror | jq
 ```
 ##### Update the full mirror config of the mirrored repository `mirrorrepo` within the organization `orga` (docker.io/minio/mc:latest)
-The used robor `orga+robot` must already exist!
+The used robot `orga+robot` must already exist!
 
 Required values to provide are
 - external_reference
