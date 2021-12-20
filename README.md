@@ -73,7 +73,7 @@ curl -v -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registr
 ##### Update a part of the mirror config of the mirrored repository `mirrorrepo` within the organization `orga` (docker.io/minio/mc:latest)
 Here only the sync interval will be updated
 ```
-curl -v -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/ansiblemirror/mirror -H "Content-Type: application/json" --data '{"sync_interval": 1260}' | jq
+curl -v -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/mirrorrepo/mirror -H "Content-Type: application/json" --data '{"sync_interval": 1260}' | jq
 ```
 Success is HTTP `201`
 ##### Initiate a mirror sync action of the mirrored repository `mirrorrepo`
