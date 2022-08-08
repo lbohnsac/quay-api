@@ -186,3 +186,18 @@ Success is HTTP `200`, no success is HTTP `400`
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/permissions/user/orga+robby | jq
 ```
 Success is HTTP `204`, no success is HTTP `400`
+## Quotas
+##### List quota of organization orga
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/organization/orga/quota | jq
+```
+Success is HTTP `200`, no success is HTTP `404`
+##### Create a quota for organization orga
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' -d '{"limit_bytes": 104857600}' https://${quay_registry}/api/v1/organization/orga/quota | jq
+```
+
+##### Delete quota id 1 for organization orga
+```
+curl -X DELETE -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/organization/orga/quota/1 | jq
+```
