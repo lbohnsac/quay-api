@@ -119,8 +119,6 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registr
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/team/orgateam | jq
 ```
 
-
-
 ## Users
 ##### Get all existing users
 ```
@@ -141,8 +139,6 @@ Success is HTTP `200`, no success is HTTP `404`
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/users/abc | jq
 ```
 Success is HTTP `200`, no success is HTTP `404`
-
-
 
 ## Robots
 ##### Create the robot `robby` within the organization `orga`
@@ -196,7 +192,6 @@ Success is HTTP `200`, no success is HTTP `404`
 ```
 curl -X POST -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' -d '{"limit_bytes": 104857600}' https://${quay_registry}/api/v1/organization/orga/quota | jq
 ```
-
 ##### Delete quota id 1 for organization orga
 ```
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/organization/orga/quota/1 | jq
