@@ -34,7 +34,8 @@ Success is HTTP `204`, no success is HTTP `403`
 
 ## Repositories
 ##### List all repositories the token has accecc to
-```curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository?public=true | jq
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository?public=true | jq
 ```
 ##### List all existing repositories in organization `orga`
 ```
