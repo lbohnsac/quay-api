@@ -12,13 +12,13 @@ export quay_registry=REGISTRY_FQDN_OR_IP
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/organizations/ | jq
 ```
-##### Get the details for the specified organization `orga`.
+##### Get the details for the organization `orga`.
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga | jq
 ```
 Success is HTTP `200`, no success is HTTP `404`
 
-##### List the applications for the specified organization
+##### List the applications for the organization `orga`
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/applications | jq
 ```
