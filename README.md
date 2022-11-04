@@ -1,6 +1,5 @@
 # quay-api
 To use the api you have to have a Bearer token in place with the correct scope
-
 ```
 export bearer_token=XXXXXXXXXXXXXXXX
 export quay_registry=REGISTRY_FQDN_OR_IP
@@ -29,7 +28,6 @@ Success is HTTP `200`
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga | jq
 ```
 Success is HTTP `204`, no success is HTTP `403`
-
 
 
 ## Repositories
@@ -85,6 +83,7 @@ Success is HTTP `201`
 curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/mirrorrepo/sync-now | jq
 ```
 
+
 ## Teams
 ##### List all teams within organization `orga`
 ```
@@ -123,6 +122,7 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registr
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/orga/team/orgateam | jq
 ```
 
+
 ## Users
 ##### Get all existing users
 ```
@@ -136,8 +136,9 @@ Success is HTTP `200`, user already exists or email is already in use is HTTP `4
 ##### Get user information of user `abc`
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/users/abc | jq
-Success is HTTP `200`, no success is HTTP `404`
 ```
+Success is HTTP `200`, no success is HTTP `404`
+
 ##### Delete user `abc` and all repositories owned by the user
 ```
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/users/abc | jq
@@ -186,6 +187,8 @@ Success is HTTP `200`, no success is HTTP `400`
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/orga/repo/permissions/user/orga+robby | jq
 ```
 Success is HTTP `204`, no success is HTTP `400`
+
+
 ## Quotas
 ##### List quota of organization `orga`
 ```
