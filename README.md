@@ -208,7 +208,7 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: appl
 Success is HTTP `204`, no success is HTTP `400`
 
 ## Take ownership
-##### Take the ownership of oragnization `orga`
+##### Take the ownership of organization `orga`
 ```
 curl -X POST -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/superuser/takeownership/orga | jq
 ```
