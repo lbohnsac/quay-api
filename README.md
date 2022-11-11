@@ -212,4 +212,4 @@ Success is HTTP `204`, no success is HTTP `400`
 ```
 curl -X POST -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/superuser/takeownership/orga | jq
 ```
-Success is HTTP `200`, no success because orgs does not exist is HTTP `404`, no success beacuse of insufficient priviledges is HTTP `403`
+Success is HTTP `200`, no success because orgs does not exist is HTTP `404`, no success because of insufficient priviledges is HTTP `403`
