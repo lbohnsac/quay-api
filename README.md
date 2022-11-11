@@ -206,3 +206,10 @@ Success is HTTP `201`, no success is HTTP `400`
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/organization/orga/quota/1 | jq
 ```
 Success is HTTP `204`, no success is HTTP `400`
+
+## Take ownership
+##### Take the ownership of oragnization `orga`
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/superuser/takeownership/orga | jq
+```
+Success is HTTP `200`, no success is HTTP `404`
