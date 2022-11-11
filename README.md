@@ -209,6 +209,7 @@ Success is HTTP `204`, no success is HTTP `400`
 
 ## Take ownership
 ##### Take the ownership of organization `orga`
+Token scope: *super:user*
 ```
 curl -X POST -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/superuser/takeownership/orga | jq
 ```
