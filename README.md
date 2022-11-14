@@ -7,7 +7,7 @@ export orga=ORGANIZATION_NAME
 export repo=REPOSITORY_NAME
 export team=TEAM_NAME
 export user=USER_NAME
-export robot
+export robot=ROBOT_SHORT_NAME
 ```
 
 ***Tested with quay version 3.7.7***
