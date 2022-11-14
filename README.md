@@ -67,26 +67,49 @@ Valid values are `NORMAL`, `READ_ONLY` and `MIRROR`... take care it's case sensi
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror | jq
 ```
-##### Update the full mirror config of the mirrored repository `$repo` within the organization `$orga` (quay.io/minio/mc:latest)
+Success is HTTP `200`, no success is HTTP `404` if there's no mirror config
+##### Create a a mirror config for the mirrored repository `$repo` within the organization `$orga` (quay.io/minio/mc:latest)
 The used robot `orga+robot` must already exist!
 
 Required values to provide are
-- external_reference
-- sync_interval
-- sync_start_date
-- root_rule
+- `external_reference`
+- `sync_interval`
+- `sync_start_date`
+- `root_rule`
+  - `rule_kind` is always `tag_glob_csv`
+  - `rule_value` is a list of tags to sync... `*` is only valid if there's the tag `latest` at the source. If this is not the case define an existing tag and *
+
+Optional values are
+- `is_enabled` if set to `true` the repository state will be switched to `MIRROR`
+- `external_registry_username`
+- `external_registry_password`
+- `external_registry_config`
+  - `unsigned_images`
+  - `verify_tls`
+  - `proxy`
+    - `http_proxy`
+    - `https_proxy`
+    - `no_proxy`
+- `sync_expiration_date`
+
+Minimal config:
 ```
-curl -v -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror -H "Content-Type: application/json" --data '{"is_enabled": true, "external_reference": "quay.io/minio/mc", "external_registry_username": "", "external_registry_config": {"verify_tls": false,"proxy": {"http_proxy": "", "https_proxy": "", "no_proxy": ""}},"sync_interval": 600, "sync_start_date": "2021-08-06T11:11:39Z", "sync_expiration_date": "2021-08-07T11:18:29Z", "root_rule": {"rule_kind": "tag_glob_csv", "rule_value": [ "latest" ]}, "robot_username": "orga+robot"}' | jq
+curl -v -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror -H "Content-Type: application/json" --data '{"external_reference": "quay.io/minio/mc", "external_registry_username": "", "sync_interval": 600, "sync_start_date": "2021-08-06T11:11:39Z", "root_rule": {"rule_kind": "tag_glob_csv", "rule_value": [ "latest" ]}, "robot_username": "orga+robot"}' | jq
 ```
+Extended config
+```
+curl -v -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror -H "Content-Type: application/json" --data '{"is_enabled": true, "external_reference": "quay.io/minio/mc", "external_registry_username": "username", "external_registry_password": "password", "external_registry_config": {"unsigned_images":true, "verify_tls": false, "proxy": {"http_proxy": "http://proxy.tld", "https_proxy": "https://proxy.tld", "no_proxy": "domain"}}, "sync_interval": 600, "sync_start_date": "2021-08-06T11:11:39Z", "root_rule": {"rule_kind": "tag_glob_csv", "rule_value": [ "*" ]}, "robot_username": "orga+robot"}' | jq
+```
+Success is HTTP `201`, no success is HTTP `409` if a mirror config already exists
 ##### Update a part of the mirror config of the mirrored repository `$repo` within the organization `$orga` (quay.io/minio/mc:latest)
 Here only the sync interval will be updated
 ```
 curl -v -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror -H "Content-Type: application/json" --data '{"sync_interval": 1260}' | jq
 ```
-Success is HTTP `201`
+Success is HTTP `201`, no sucess is HTTP `404` if ther is no mirror config
 ##### Initiate a mirror sync action of the mirrored repository `$repo` within the organization `$orga`
 ```
-curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/repo/${repo}/sync-now | jq
+curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror/sync-now | jq
 ```
 
 ## Teams
