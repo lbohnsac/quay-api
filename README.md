@@ -14,22 +14,26 @@ export robot=ROBOT_SHORT_NAME
 
 ## Organizations (Namespaces)
 ##### List all existing `organizations`
+Token scope: *super:user*
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/organizations/ | jq
 ```
 ##### Get the details for the organization `$orga`
+Token scope: *super:user* or *org:admin* or *repo:create*
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga} | jq
 ```
 Success is HTTP `200`, no success is HTTP `404`
 
 ##### List the applications for the organization `$orga`
+Token scope: *org:admin*
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/applications | jq
 ```
 Success is HTTP `200`
 
 ##### Delete the organization `$orga`
+Token scope: *super:user* or *org:admin*
 ```
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga} | jq
 ```
