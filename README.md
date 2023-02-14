@@ -80,6 +80,29 @@ curl -X GET \
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository?namespace=${orga} | jq
 ```
+### Create the repository `$repo` in organization `$orga`
+```
+curl -X POST \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "namespace": "'$orga'", \
+              "repository": "'$repo'", \
+              "visibility": "public", \
+              "description"" "", \
+              "repo_kind": "image"              
+             }' \
+     https://${quay_registry}/api/v1/repository | jq
+```
+Success is HTTP `201`, no success is HTTP `400`
+
+Required properties are `namespace`, `repository`, `visibility` and `descriprtion`
+
+Optional property is `repo_kind` which defaults to `image`
+
+- Valid values for `visibility` are `public` or `private`
+- Valid values for `description` are `empty string` or `markdown encoded text`
+- Valid values for `repo_kind` are `image` or `application`
 ### Change the visibility of the repository `$repo` within the organization `$orga` to `public`
 ```
 curl -X POST \
