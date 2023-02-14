@@ -99,7 +99,7 @@ curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: applic
 ```
 Success is HTTP `201`, no success is HTTP `400`
 
-Required properties are `namespace`, `repository`, `visibility` and `descriprtion`
+Required properties are `namespace`, `repository`, `visibility` and `description`
 
 Optional property is `repo_kind` which defaults to `image`
 
