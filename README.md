@@ -94,6 +94,9 @@ curl -X POST \
              }' \
      https://${quay_registry}/api/v1/repository | jq
 ```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"namespace": "'$orga'","repository": "'$repo'","visibility": "public","description"" "","repo_kind": "image"}' https://${quay_registry}/api/v1/repository | jq
+```
 Success is HTTP `201`, no success is HTTP `400`
 
 Required properties are `namespace`, `repository`, `visibility` and `descriprtion`
