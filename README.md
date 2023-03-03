@@ -373,8 +373,31 @@ curl -X DELETE \
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/team/${team} | jq
 ```
 success is HTTP `204`
+### Enable LDAP group team sync
+```
+curl -X POST \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "group_dn": "cn=ldapgroup,dc=dmain,dc=tld" \
+             }' \
+     https://${quay_registry}/api/v1/organization/${orga}/team/${team}/syncing | jq
+```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"group_dn": "cn=ldapgroup,dc=dmain,dc=tld"}' https://${quay_registry}/api/v1/organization/${orga}/team/${team}/syncing | jq
+```
+success is HTTP `200`, could not sync to group: group does not exist or is empty is HTTP `400`
+### Remove LDAP group team sync
+```
+curl -X DELETE \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/organization/${orga}/team/${team}/syncing | jq
 
-
+```
+```
+curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/team/${team}/syncing | jq
+```
+success is HTTP `200`
 ## Users
 ### Get all existing users
 Works only if quay is configured with `AUTHENTICATION_TYPE: database`
