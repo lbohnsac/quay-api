@@ -12,6 +12,19 @@ export robot=ROBOT_SHORT_NAME
 
 ***Tested with quay version 3.7.7***
 
+Table of contents
+=================
+<!--ts-->
+   * [Organizations](#organizations-namespaces)
+   * [Repositories](#repositories)
+   * [Mirrored repositories](#mirrored-repositories-needs-to-be-reviewed)
+   * [Teams](#teams)
+   * [Users](#users)
+   * [OrgRobots](#orgrobots)
+   * [UserRobots](#userrobots-needs-to-be-reviewed)
+   * [Quotas](#quotas)
+   * [Take ownership](#take-ownership)
+<!--te-->
 
 ## Organizations (Namespaces)
 ### List all existing `organizations`
