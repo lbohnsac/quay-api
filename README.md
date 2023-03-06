@@ -74,6 +74,17 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registr
 Success is HTTP `204`, no success is HTTP `403`
 
 
+## Prototypes (Default permissions)
+### Get current existing protoypes
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
+```
+Success is HTTP`200`
 ## Repositories
 ### List all repositories the user who created the token has access to
 ```
