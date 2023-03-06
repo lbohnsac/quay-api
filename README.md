@@ -38,6 +38,20 @@ curl -X GET \
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/organizations/ | jq
 ```
+### Create the organization `$orga`
+```
+curl -X POST \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "name": "${orga}"\
+             }' \
+     https://${quay_registry}/api/v1/organization/ | jq
+```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"name": "${orga}"}' https://${quay_registry}/api/v1/organization/ | jq
+```
+Success is HTTP `201`
 ### Get the details for the organization `$orga`
 > Token scope: *`super:user` or `org:admin` or `repo:create`*
 ```
