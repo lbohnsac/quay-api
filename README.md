@@ -76,7 +76,7 @@ Success is HTTP `204`, no success is HTTP `403`
 
 
 ## Prototypes (Default permissions)
-### Get current existing protoypes
+### Get current existing permission protoypes
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
