@@ -76,6 +76,8 @@ Success is HTTP `204`, no success is HTTP `403`
 
 
 ## Prototypes (Default permissions)
+> Default permissions are granted automatically to newly created repositories, in addition to the default of the repository's creator.
+Default permissions are not added to already existing repositories.
 ### Get current existing permission protoypes
 ```
 curl -X GET \
@@ -86,6 +88,105 @@ curl -X GET \
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
 ```
 Success is HTTP`200`
+### Create a permission prototype for team `$team` to `admin`
+```
+curl -X POST \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "delegate": {\
+                           "name": "${team}", \
+                           "kind": "team" \
+                           }, \
+              "role": "admin"              
+             }' \
+     https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
+```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"delegate":{"name": "${team}","kind": "team"}, "role": "admin"}' https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
+```
+
+Required properties are `delegate` and `role`
+
+Optional properties is `activating_user`
+
+Property `delegate` requires `name` and `kind`
+Property `activating_user` requires `name`
+
+- Valid values for `role` are `admin, `write` and `read`
+- Valid values for kind are `team` and `user`
+
+Success is HTTP`200`
+### Create a permission prototype for user `$user` to `write`
+```
+curl -X POST \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "delegate": {\
+                           "name": "${user}", \
+                           "kind": "user" \
+                           }, \
+              "role": "write"              
+             }' \
+     https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
+```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"delegate":{"name": "${user}","kind": "user"}, "role": "write"}' https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
+```
+
+Required properties are `delegate` and `role`
+
+Optional properties is `activating_user`
+
+Property `delegate` requires `name` and `kind`
+Property `activating_user` requires `name`
+
+- Valid values for `role` are `admin, `write` and `read`
+- Valid values for kind are `team` and `user`
+
+Success is HTTP`200`
+### Create a permission prototype for robot `$robot` to `read`
+A robot is a user with the robot acount name (`${orga}+${robot}`)
+```
+curl -X POST \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "delegate": {\
+                           "name": "'${orga}+${robot}'", \
+                           "kind": "user" \
+                           }, \
+              "role": "read"              
+             }' \
+     https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
+```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"delegate":{"name": "'${orga}+${robot}","kind": "user"}, "role": "read"}' https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
+```
+
+Required properties are `delegate` and `role`
+
+Optional properties is `activating_user`
+
+Property `delegate` requires `name` and `kind`
+Property `activating_user` requires `name`
+
+- Valid values for `role` are `admin, `write` and `read`
+- Valid values for kind are `team` and `user`
+
+Success is HTTP`200`
+### Delete a prototype permission
+Get `${prototypes_id}` by querying the prototypes
+```
+curl -X DELETE \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/organization/${orga}/prototypes/${prototypes_id} | jq
+```
+```
+curl -X DELETE -H "Authorization: Bearer ${bearer_token} https://${quay_registry}/api/v1/organization/${orga}/prototypes/${prototypes_id} | jq
+```
+Success is HTTP`204`
 ## Repositories
 ### List all repositories the user who created the token has access to
 ```
