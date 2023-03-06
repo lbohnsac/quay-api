@@ -16,6 +16,7 @@ Table of contents
 =================
 <!--ts-->
    * [Organizations](#organizations-namespaces)
+   * [Prototypes (Default permissions)](#prototypes-default-permissions)
    * [Repositories](#repositories)
    * [Mirrored repositories](#mirrored-repositories-needs-to-be-reviewed)
    * [Teams](#teams)
