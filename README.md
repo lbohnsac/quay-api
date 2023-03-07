@@ -503,6 +503,16 @@ curl -X DELETE \
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/team/${team}/members/${user} | jq
 ```
 Success is HTTP `204`
+### Get all permissions for team `$team` in organization `$orga`
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/organization/${orga}/team/${team}/permissions | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/team/${team}/permissions | jq
+```
+Success is HTTP `200`
 ### Delete the team `$team` within the organization `$orga`
 ```
 curl -X DELETE \
