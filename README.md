@@ -549,6 +549,16 @@ curl -X GET \
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/users/ | jq
 ```
+### Get all currently logged in users
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/user/ | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/user/ | jq
+```
+Success is HTTP `200`
 ### Create a user `abc` with email `abc@abc.com`
 Works only if quay is configured with `AUTHENTICATION_TYPE: database`
 ```
