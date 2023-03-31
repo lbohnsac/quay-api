@@ -127,7 +127,7 @@ Optional properties is `activating_user`
 Property `delegate` requires `name` and `kind`
 Property `activating_user` requires `name`
 
-- Valid values for `role` are `admin, `write` and `read`
+- Valid values for `role` are `admin`, `write` and `read`
 - Valid values for kind are `team` and `user`
 
 Success is HTTP`200`
