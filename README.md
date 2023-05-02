@@ -409,6 +409,23 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/
 ```
 Success is HTTP `200`
 
+### Create a new tag `$newtag` for manifest digest `$manifest_digest` in reopsitory `$repo` within organization `$orga`
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "manifest_digest": "sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+             }' \  
+     https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${newtag} | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"manifest_digest": "sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${newtag} | jq
+```
+The provided manifest digest has to be the full digest in format `sha256:64-characters`
+
+Success is HTTP`201`
+
 ### Set or change the expiration date to `Tue May 2 16:33:45 CEST 2023` of tag `$tag` for repository `$repo` in organization `$orga`
 
 Convert given date into a UNIX time stamp
@@ -430,6 +447,16 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: applica
 ```
 Success is HTTP `201`
 
+## Delete tag `$tag` in repository `$repo` within organization `$orga`
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
+```
+Success is HTTP `204`
 
 ## Teams
 ### List all teams within organization `$orga` (and additional info)
