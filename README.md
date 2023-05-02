@@ -19,6 +19,7 @@ Table of contents
    * [Prototypes (Default permissions)](#prototypes-default-permissions)
    * [Repositories](#repositories)
    * [Mirrored repositories](#mirrored-repositories-needs-to-be-reviewed)
+   * [Tags](#tags)
    * [Teams](#teams)
    * [Users](#users)
    * [OrgRobots](#orgrobots)
@@ -176,7 +177,7 @@ curl -X POST \
      https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
 ```
 ```
-curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"delegate":{"name": "'${orga}+${robot}","kind": "user"}, "role": "read"}' https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"delegate":{"name": "'${orga}+${robot}'","kind": "user"}, "role": "read"}' https://${quay_registry}/api/v1/organization/${orga}/prototypes | jq
 ```
 
 Required properties are `delegate` and `role`
@@ -384,7 +385,7 @@ curl -X PUT \
 ```
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"sync_interval": 1260}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror | jq
 ```
-Success is HTTP `201`, no sucess is HTTP `404` if ther is no mirror config
+Success is HTTP `201`, no sucess is HTTP `404` if there is no mirror config
 ### Initiate a mirror sync action of the mirrored repository `$repo` within the organization `$orga`
 ```
 curl -X POST \
@@ -394,6 +395,40 @@ curl -X POST \
 ```
 curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror/sync-now | jq
 ```
+
+
+## Tags
+### List all tags for repository `$repo` in organization `$orga`
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/ | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/ | jq
+```
+Success is HTTP `200`
+
+### Set or change the expiration date to `Tue May 2 16:33:45 CEST 2023` of tag `$tag` for repository `$repo` in organization `$orga`
+
+Convert given date into a UNIX time stamp
+```
+date -d "2023-05-02 16:33:45 CEST" +%s
+1683038025
+```
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "expiration": 1683038025 \
+             }' \  
+     https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"expiration": 1683038025}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
+```
+Success is HTTP `201`
 
 
 ## Teams
