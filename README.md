@@ -467,12 +467,12 @@ Success is HTTP `201`
 
 ### Delete tag `$tag` in repository `$repo` within organization `$orga`
 ```
-curl -X GET \
+curl -X DELETE \
      -H "Authorization: Bearer ${bearer_token}" \
      https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
 ```
 ```
-curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
+curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
 ```
 Success is HTTP `204`
 
