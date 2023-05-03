@@ -450,6 +450,21 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: applica
 ```
 Success is HTTP `201`
 
+## Reset the expiration date to `Never` (delete the expiration date)
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "expiration": null \
+             }' \  
+     https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"expiration": null}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
+```
+Success is HTTP `201`
+
 ## Delete tag `$tag` in repository `$repo` within organization `$orga`
 ```
 curl -X GET \
