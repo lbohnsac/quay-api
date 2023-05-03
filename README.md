@@ -401,7 +401,7 @@ curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}
 
 
 ## Tags
-### List all tags for repository `$repo` in organization `$orga`
+### List all tags in repository `$repo` within organization `$orga`
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -450,7 +450,7 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: applica
 ```
 Success is HTTP `201`
 
-## Reset the expiration date to `Never` (delete the expiration date)
+## Reset the expiration date to `Never` (delete the expiration date) of tag `$tag` in reopsitory `$repo` within organization `$orga`
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
