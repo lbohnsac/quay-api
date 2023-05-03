@@ -450,7 +450,7 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: applica
 ```
 Success is HTTP `201`
 
-## Reset the expiration date to `Never` (delete the expiration date) of tag `$tag` in reopsitory `$repo` within organization `$orga`
+### Reset the expiration date to `Never` (delete the expiration date) of tag `$tag` in reopsitory `$repo` within organization `$orga`
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -465,7 +465,7 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: applica
 ```
 Success is HTTP `201`
 
-## Delete tag `$tag` in repository `$repo` within organization `$orga`
+### Delete tag `$tag` in repository `$repo` within organization `$orga`
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
