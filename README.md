@@ -437,7 +437,7 @@ date -d "2023-05-02 16:33:45 CEST" +%s
 1683038025
 ```
 ```
-curl -X GET \
+curl -X PUT \
      -H "Authorization: Bearer ${bearer_token}" \
      -H "Content-Type: application/json" \
      --data '{\
@@ -446,13 +446,13 @@ curl -X GET \
      https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
 ```
 ```
-curl -X GET -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"expiration": 1683038025}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"expiration": 1683038025}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
 ```
 Success is HTTP `201`
 
 ### Reset the expiration date to `Never` (delete the expiration date) of tag `$tag` in reopsitory `$repo` within organization `$orga`
 ```
-curl -X GET \
+curl -X PUT \
      -H "Authorization: Bearer ${bearer_token}" \
      -H "Content-Type: application/json" \
      --data '{\
@@ -461,7 +461,7 @@ curl -X GET \
      https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
 ```
 ```
-curl -X GET -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"expiration": null}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"expiration": null}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/${tag} | jq
 ```
 Success is HTTP `201`
 
