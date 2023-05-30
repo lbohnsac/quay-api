@@ -700,7 +700,7 @@ curl -X PUT \
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/robots/${robot} | jq
 ```
 Success is HTTP `201`, no success is HTTP `400`
-### Get information about orgrobot `$robot` (including the robbot token) within the organization `$orga`
+### Get information about orgrobot `$robot` (including the robot token) within the organization `$orga`
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
