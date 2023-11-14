@@ -4,6 +4,7 @@ To use the api you have to have a bearer token in place with the correct scope
 export bearer_token=XXXXXXXXXXXXXXXX
 export quay_registry=REGISTRY_FQDN_OR_IP
 export orga=ORGANIZATION_NAME
+export email=email@domain.tld
 export repo=REPOSITORY_NAME
 export tag=TAG
 export newtag=NEWTAG
@@ -48,12 +49,13 @@ curl -X POST \
      -H "Authorization: Bearer ${bearer_token}" \
      -H "Content-Type: application/json" \
      --data '{\
-              "name": "${orga}"\
+              "name": "${orga}", \
+              "email": "${email}" \
              }' \
      https://${quay_registry}/api/v1/organization/ | jq
 ```
 ```
-curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"name": "${orga}"}' https://${quay_registry}/api/v1/organization/ | jq
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"name": "${orga}"}, "email": "${email}"' https://${quay_registry}/api/v1/organization/ | jq
 ```
 Success is HTTP `201`
 ### Get the details for the organization `$orga`
