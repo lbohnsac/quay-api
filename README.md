@@ -20,8 +20,22 @@ Table of contents
 =================
 <!--ts-->
    * [Organizations](#organizations-namespaces)
+     * [List all existing `organizations`](#list-all-existing-organizations)
+     * [Create the organization `$orga`](#create-the-organization-orga)
+     * [Get the details for the organization `$orga`](#get-the-details-for-the-organization-orga)
+     * [List the applications for the organization `$orga`](#list-the-applications-for-the-organization-orga)
+     * [Delete the organization `$orga`](#delete-the-organization-orga)
    * [Prototypes (Default permissions)](#prototypes-default-permissions)
+     * [Get current existing permission protoypes](#get-current-existing-permission-protoypes)
+     * [Create a permission prototype for team `$team` to `admin`](#create-a-permission-prototype-for-team-team-to-admin)
+     * [Create a permission prototype for user `$user` to `write`](#create-a-permission-prototype-for-user-user-to-write)
+     * [Create a permission prototype for robot `$robot` to `read`](#create-a-permission-prototype-for-robot-robot-to-read)
+     * [Delete a prototype permission](#delete-a-prototype-permission)
    * [Namespace auto-pruning](#namespace-auto-pruning)
+     * [List the current auto-prune policy in organization `$orga`](#list-the-current-auto-prune-policy-in-organization-orga)
+     * [Get the uuid of the existing auto-prune policy in organization `$orga`](#get-the-uuid-of-the-existing-auto-prune-policy-in-organization-orga)
+     * [Set the auto-prune policy in organization `$orga`](#set-the-auto-prune-policy-in-organization-orga)
+     * [Delete the existing auto-prune policy in organization `$orga`](#delete-the-existing-auto-prune-policy-in-organization-orga)
    * [Repositories](#repositories)
    * [Mirrored repositories](#mirrored-repositories-needs-to-be-reviewed)
    * [Tags](#tags)
@@ -215,7 +229,7 @@ Success is HTTP`204`
 > 
 > There can only be one policy at a time.
 
-### List the current auto-prune policy
+### List the current auto-prune policy in organization `$orga`
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -230,7 +244,7 @@ If there is no auto-prune policy set the response will be an empty array `polici
 
 If there is an existing auto-prune policy the respoonse is the array `policies` containing the current set policy. E.g. `{"policies": [{"uuid": "cb44b3b7-bca6-42e4-8eaf-4350f09b5a63", "method": "number_of_tags", "value": 10}]}`
 
-### Get the uuid of an existing auto-prune policy
+### Get the uuid of the existing auto-prune policy in organization `$orga`
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -240,7 +254,7 @@ curl -X GET \
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/autoprunepolicy | jq -r '.policies[].uuid'
 ```
 Success is HTTP `200`
-### Set an auto-prune policy
+### Set the auto-prune policy in organization `$orga`
 ```
 curl -X POST \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -264,7 +278,7 @@ Method `number_of_tags` expects an integer.
 
 Method `creation_date` expects a string containing the amout of time the image is not deleted since creation. E.g. `"30d"` or `"2w"`.
 
-### Delete an existing auto-prune policy
+### Delete the existing auto-prune policy in organization `$orga`
 ```
 curl -X DELETE \
      -H "Authorization: Bearer ${bearer_token}" \
