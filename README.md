@@ -209,6 +209,12 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token} https://${quay_registry
 ```
 Success is HTTP`204`
 ## Namespace auto-pruning
+> Auto-pruning policies are available since quay v3.10.0
+> 
+> Auto-pruning policies work at the organization level and apply to all repositories.
+> 
+> There can only be one policy at a time.
+
 ### List the current auto-prune policy
 ```
 curl -X GET \
