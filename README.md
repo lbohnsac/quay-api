@@ -21,6 +21,7 @@ Table of contents
 <!--ts-->
    * [Organizations](#organizations-namespaces)
    * [Prototypes (Default permissions)](#prototypes-default-permissions)
+   * [Namespace auto-pruning](#namespace-auto-pruning)
    * [Repositories](#repositories)
    * [Mirrored repositories](#mirrored-repositories-needs-to-be-reviewed)
    * [Tags](#tags)
@@ -207,6 +208,69 @@ curl -X DELETE \
 curl -X DELETE -H "Authorization: Bearer ${bearer_token} https://${quay_registry}/api/v1/organization/${orga}/prototypes/${prototypes_id} | jq
 ```
 Success is HTTP`204`
+## Namespace auto-pruning
+### List the current auto-prune policy
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/organization/${orga}/autoprunepolicy | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/autoprunepolicy | jq
+```
+Success is HTTP `200`
+
+If there is no auto-prune policy set the response will be an empty array `policies`. E.g.`{"policies": []}`
+
+If there is an existing auto-prune policy the respoonse is the array `policies` containing the current set policy. E.g. `{"policies": [{"uuid": "cb44b3b7-bca6-42e4-8eaf-4350f09b5a63", "method": "number_of_tags", "value": 10}]}`
+
+### Get the uuid of an existing auto-prune policy
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/organization/${orga}/autoprunepolicy | jq -r '.policies[].uuid'
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/autoprunepolicy | jq -r '.policies[].uuid'
+```
+Success is HTTP `200`
+### Set an auto-prune policy
+```
+curl -X POST \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "method": "creation_date", \
+              "value": "30d" \
+             }' \
+     https://${quay_registry}/api/v1/organization/ ${orga}/autoprunepolicy/ | jq
+```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"method": "creation_date"}, "value": "30d"' https://${quay_registry}/api/v1/organization/${orga}/autoprunepolicy/ | jq
+```
+Success is HTTP `201`, no success is HTTP `400`
+
+Valid `method` values are
+- `creation_date`
+- `number_of_tags`.
+
+Method `number_of_tags` expects an integer.
+
+Method `creation_date` expects a string containing the amout of time the image is not deleted since creation. E.g. `"30d"` or `"2w"`.
+
+### Delete an existing auto-prune policy
+```
+curl -X DELETE \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/organization/${orga}/autoprunepolicy/${policy_uuid} | jq
+```
+```
+curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/autoprunepolicy/${policy_uuid} | jq
+```
+Success is HTTP `200`, no success is HTTP `404`
+
+A successful deletion will return the deleted uuid.
+
 ## Repositories
 ### List all repositories the user who created the token has access to
 ```
