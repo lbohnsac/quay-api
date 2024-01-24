@@ -231,9 +231,9 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token} https://${quay_registry
 Success is HTTP`204`
 
 ## Namespace auto-pruning (Organizations)
-> Auto-pruning policies are available since quay v3.10.0
+> Auto-pruning policies for organizations are available since quay `v3.10.0`
 > 
-> Auto-pruning policies work at the organization level and apply to all repositories.
+> Auto-pruning policies work at the organization level and apply to **all** repositories of this organization.
 > 
 > There can only be one policy at a time.
 
@@ -327,9 +327,9 @@ Success is HTTP `200`, no success is HTTP `404`
 A successful deletion will return the deleted uuid.
 
 # Namespace auto-pruning (Current user)
-> Auto-pruning policies the current user are available since quay v3.10.0
+> Auto-pruning policies for the current user are available since quay `v3.10.0`
 >
-> **The current user is the user who created the bearer token in use**
+> **The current user is the user who created the bearer token in use.**
 > 
 > There can only be one policy at a time.
 
