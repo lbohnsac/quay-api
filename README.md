@@ -847,7 +847,7 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registr
 success is HTTP `200`
 ## Users
 ### Get all existing users
-Works only if quay is configured with `AUTHENTICATION_TYPE: database`
+Works only if quay is configured with `AUTHENTICATION_TYPE: database` and `AUTHENTICATION_TYPE: LDAP`
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -856,7 +856,7 @@ curl -X GET \
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/users/ | jq
 ```
-### Get all currently logged in users
+### Get info about the currently logged in user
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
