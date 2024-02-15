@@ -57,7 +57,7 @@ Table of contents
    * [Tags](#tags)
       * [List all tags in repository `$repo` within organization `$orga`](#list-all-tags-in-repository-repo-within-organization-orga)
       * [Create a new tag `$newtag` for manifest digest `$manifest_digest` in reopsitory `$repo` within organization `$orga`](#create-a-new-tag-newtag-for-manifest-digest-manifest_digest-in-reopsitory-repo-within-organization-orga)
-      * [Set or change the expiration date to `Tue May 2 16:33:45 CEST 2023` of tag `$tag` for repository `$repo` in organization `$orga]`(#set-or-change-the-expiration-date-to-tue-may-2-163345-cest-2023-of-tag-tag-for-repository-repo-in-organization-orga)
+      * [Set or change the expiration date to `Tue May 2 16:33:45 CEST 2023` of tag `$tag` for repository `$repo` in organization `$orga]`](#set-or-change-the-expiration-date-to-tue-may-2-163345-cest-2023-of-tag-tag-for-repository-repo-in-organization-orga)
       * [Reset the expiration date to `Never` (delete the expiration date) of tag `$tag` in reopsitory `$repo` within organization `$orga`](#reset-the-expiration-date-to-never-delete-the-expiration-date-of-tag-tag-in-reopsitory-repo-within-organization-orga)
       * [Delete tag `$tag` in repository `$repo` within organization `$orga`](#delete-tag-tag-in-repository-repo-within-organization-orga)
    * [Teams](#teams)
