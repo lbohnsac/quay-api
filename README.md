@@ -65,7 +65,11 @@ Table of contents
    * [OrgRobots](#orgrobots)
    * [UserRobots](#userrobots-needs-to-be-reviewed)
    * [Quotas](#quotas)
+       * [List quota of organization `$orga`](#list-quota-of-organization-orga)
+       * [Create a quota of 100MB for organization `$orga`](#create-a-quota-of-100mb-for-organization-orga)
+       * [Delete quota id 1 for organization `$orga`](#delete-quota-id-1-for-organization-orga)
    * [Take ownership](#take-ownership)
+       * [Take the ownership of organization `$orga`]([#take-the-ownership-of-organization-orga)
 <!--te-->
 
 ## Organizations (Namespaces)
