@@ -452,7 +452,7 @@ A successful deletion will return the deleted uuid. E.g. `{"uuid": "cb44b3b7-bca
 ## Repository auto-prune policy
 > Auto-pruning policies for repositories are available since quay `v3.11.0`
 > 
-> Auto-pruning policies work at the repository level.
+> Auto-pruning policies on the repository level work for organizations and users in the same way. Use for user repositories the user name as ${orga}!
 > 
 > There can only be one policy at a time.
 
@@ -961,12 +961,12 @@ curl -X POST \
      -H "Authorization: Bearer ${bearer_token}" \
      -H "Content-Type: application/json" \
      --data '{\
-              "group_dn": "cn=ldapgroup,dc=dmain,dc=tld" \
+              "group_dn": "cn=ldapgroup,dc=domain,dc=tld" \
              }' \
      https://${quay_registry}/api/v1/organization/${orga}/team/${team}/syncing | jq
 ```
 ```
-curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"group_dn": "cn=ldapgroup,dc=dmain,dc=tld"}' https://${quay_registry}/api/v1/organization/${orga}/team/${team}/syncing | jq
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"group_dn": "cn=ldapgroup,dc=domain,dc=tld"}' https://${quay_registry}/api/v1/organization/${orga}/team/${team}/syncing | jq
 ```
 success is HTTP `200`, could not sync to group: group does not exist or is empty is HTTP `400`
 ### Remove LDAP group team sync
