@@ -56,6 +56,7 @@ Table of contents
       * [Initiate a mirror sync action of the mirrored repository `$repo` within the organization `$orga`](https://github.com/lbohnsac/quay-api?tab=readme-ov-file#initiate-a-mirror-sync-action-of-the-mirrored-repository-repo-within-the-organization-orga)
    * [Tags](#tags)
       * [List all tags in repository `$repo` within organization `$orga`](#list-all-tags-in-repository-repo-within-organization-orga)
+      * [List all ***active*** tags in repository `$repo` within organization `$orga`](#list-all-active-tags-in-repository-repo-within-organization-orga)
       * [Create a new tag `$newtag` for manifest digest `$manifest_digest` in reopsitory `$repo` within organization `$orga`](#create-a-new-tag-newtag-for-manifest-digest-manifest_digest-in-reopsitory-repo-within-organization-orga)
       * [Set or change the expiration date to `Tue May 2 16:33:45 CEST 2023` of tag `$tag` for repository `$repo` in organization `$orga]`](#set-or-change-the-expiration-date-to-tue-may-2-163345-cest-2023-of-tag-tag-for-repository-repo-in-organization-orga)
       * [Reset the expiration date to `Never` (delete the expiration date) of tag `$tag` in reopsitory `$repo` within organization `$orga`](#reset-the-expiration-date-to-never-delete-the-expiration-date-of-tag-tag-in-reopsitory-repo-within-organization-orga)
@@ -645,7 +646,19 @@ curl -X GET \
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/ | jq
 ```
-Success is HTTP `200`
+Success is HTTP `200`, repo does not exist is HTTP `404`
+
+### List all ***active*** tags in repository `$repo` within organization `$orga`
+> Active tags are the currently available (active) tags, not deleted tags still restoreable from the time machine
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/?onlyActiveTags=true | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/tag/?onlyActiveTags=true | jq
+```
+Success is HTTP `200`, repo does not exist is HTTP `404`
 
 ### Create a new tag `$newtag` for manifest digest `$manifest_digest` in reopsitory `$repo` within organization `$orga`
 ```
