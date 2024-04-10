@@ -32,7 +32,7 @@ Table of contents
      * [Create a permission prototype for user `$user` to `write`](#create-a-permission-prototype-for-user-user-to-write)
      * [Create a permission prototype for robot `$robot` to `read`](#create-a-permission-prototype-for-robot-robot-to-read)
      * [Delete a prototype permission](#delete-a-prototype-permission)
-   * [Organization auto-prune policy (Namespaces))](#organization-auto-prune-policy-namespaces)
+   * [Organization auto-prune policy (Namespaces)](#organization-auto-prune-policy-namespaces)
      * [List the current auto-prune policy for organization `$orga`](#list-the-current-auto-prune-policy-for-organization-orga)
      * [Get the uuid of the existing auto-prune policy for organization `$orga`](#get-the-uuid-of-the-existing-auto-prune-policy-for-organization-orga)
      * [Set the auto-prune policy for organization `$orga`](#set-the-auto-prune-policy-for-organization-orga)
