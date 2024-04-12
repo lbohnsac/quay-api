@@ -1108,6 +1108,17 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registr
 Success is HTTP `204`, no success is HTTP `400`
 
 ## UserRobots (needs to be reviewed!)
+### List all existing robots of the current user
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/user/robots | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/user/robots | jq
+```
+Success is HTTP `200`
+
 ### Set the permission `write` to orgrobot `$robot` for repository `$repo` within organization `$orga`
 ```
 curl -X PUT \
