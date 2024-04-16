@@ -78,6 +78,8 @@ Table of contents
        * [Delete quota id 1 for organization `$orga`](#delete-quota-id-1-for-organization-orga)
    * [Take ownership](#take-ownership)
        * [Take the ownership of organization `$orga`]([#take-the-ownership-of-organization-orga)
+   * [OAuth 2 access token (Authorizations)](#oauth-2-access-token-authorizations)
+       * [List all existing OAuth 2 access tokens for the current user](#list-all-existing-oauth-2-access-tokens-for-the-current-user)
 <!--te-->
 
 ## Organizations (Namespaces)
@@ -1202,3 +1204,16 @@ curl -X POST -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: applic
 ```
 
 Success is HTTP `200`, no success because orgs does not exist is HTTP `404`, no success because of insufficient priviledges is HTTP `403`
+
+## OAuth 2 access token (Authorizations)
+### List all existing OAuth 2 access tokens for the current user
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H 'Content-Type: application/json' \
+     https://${quay_registry}/api/v1/user/authorizations | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/user/authorizations | jq
+```
+Success is HTTP `200`
