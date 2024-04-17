@@ -76,7 +76,7 @@ Table of contents
       * [Get all existing users](#get-all-existing-users)
       * [Create an user `${user}` with email `${email}`](#create-an-user-user-with-email-email)
       * [Get user information of user `$user`](#get-user-information-of-user-user)
-      * [Delete the user $user and all repositories owned by the user](#delete-the-user-user-and-all-repositories-owned-by-the-user)
+      * [Delete the user `$user` and all repositories owned by the user](#delete-the-user-user-and-all-repositories-owned-by-the-user)
    * [OrgRobots](#orgrobots)
    * [UserRobots](#userrobots-needs-to-be-reviewed)
    * [Quotas](#quotas)
@@ -87,6 +87,7 @@ Table of contents
        * [Take the ownership of organization `$orga`]([#take-the-ownership-of-organization-orga)
    * [OAuth 2 access token (Authorizations)](#oauth-2-access-token-authorizations)
        * [List all existing OAuth 2 access tokens for the current user](#list-all-existing-oauth-2-access-tokens-for-the-current-user)
+       * [Delete an existing OAuth 2 access token for the current user](#delete-an-existing-oauth-2-access-token-for-the-current-user)
 <!--te-->
 
 ## Organizations (Namespaces)
@@ -1084,6 +1085,7 @@ curl -X PUT \
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/robots/${robot} | jq
 ```
 Success is HTTP `201`, no success is HTTP `400`
+
 ### Get information about orgrobot `$robot` (including the robot token) within the organization `$orga`
 ```
 curl -X GET \
@@ -1094,6 +1096,7 @@ curl -X GET \
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/robots/${robot} | jq
 ```
 Success is HTTP `200`, no success is HTTP `400`
+
 ### List all existing orgrobots within the organization `$orga`
 ```
 curl -X GET \
@@ -1106,6 +1109,7 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/
 Success is HTTP `200`
 
 All robots and their tokens are listed
+
 ### Replace the current token of orgrobot `$robot` with a new token within the organization `$orga`
 ```
 curl -X POST \
@@ -1128,6 +1132,7 @@ curl -X GET \
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/robots/${robot}/permissions | jq
 ```
 Success is HTTP `200`, no success is HTTP `400`
+
 ### Delete the orgrobot `$robot` within the organization `$orga`
 ```
 curl -X DELETE \
@@ -1184,7 +1189,6 @@ Success is HTTP `204`, no success is HTTP `400`
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
-     -H 'Content-Type: application/json' \
      https://${quay_registry}/api/v1/organization/${orga}/quota | jq
 ```
 ```
@@ -1211,7 +1215,6 @@ Success is HTTP `201`, no success is HTTP `400`
 ```
 curl -X DELETE \
      -H "Authorization: Bearer ${bearer_token}" \
-     -H 'Content-Type: application/json' \
      https://${quay_registry}/api/v1/organization/${orga}/quota/1 | jq
 ```
 ```
@@ -1241,10 +1244,22 @@ Success is HTTP `200`, no success because orgs does not exist is HTTP `404`, no 
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
-     -H 'Content-Type: application/json' \
      https://${quay_registry}/api/v1/user/authorizations | jq
 ```
 ```
-curl -X GET -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/user/authorizations | jq
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/user/authorizations | jq
 ```
 Success is HTTP `200`
+
+### Delete an existing OAuth 2 access token for the current user
+> Token scope: *`user:admin`*
+Get `${token_uuid}` by querying the authorizations
+```
+curl -X DELETE \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/user/authorizations/${token_uuid} | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" [https://${quay_registry}/api/v1/user/authorizations | jq](https://${quay_registry}/api/v1/user/authorizations/${token_uuid} | jq)
+```
+Success is HTTP `204`
