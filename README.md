@@ -32,19 +32,19 @@ Table of contents
      * [Create a permission prototype for user `$user` to `write`](#create-a-permission-prototype-for-user-user-to-write)
      * [Create a permission prototype for robot `$robot` to `read`](#create-a-permission-prototype-for-robot-robot-to-read)
      * [Delete a prototype permission](#delete-a-prototype-permission)
-   * [Organization auto-prune policy (Namespaces)](#organization-auto-prune-policy-namespaces)
+   * [Auto-prune policy for organizations (Namespaces)](#auto-prune-policy-for-organizations-namespaces)
      * [List the current auto-prune policy for organization `$orga`](#list-the-current-auto-prune-policy-for-organization-orga)
      * [Get the uuid of the existing auto-prune policy for organization `$orga`](#get-the-uuid-of-the-existing-auto-prune-policy-for-organization-orga)
      * [Set the auto-prune policy for organization `$orga`](#set-the-auto-prune-policy-for-organization-orga)
      * [Modify the existing auto-prune policy for organization `$orga`](#modify-the-existing-auto-prune-policy-for-organization-orga)
      * [Delete the existing auto-prune policy for organization `$orga`](#delete-the-existing-auto-prune-policy-for-organization-orga)
-   * [User auto-prune policy (Current user)](#user-auto-prune-policy-current-user)
+   * [Auto-prune policy for User (Current user)](#uauto-prune-policy-for-user-current-user)
      * [List the current auto-prune policy for the current user](#list-the-current-auto-prune-policy-for-the-current-user)
      * [Get the uuid of the existing auto-prune policy for the current user](#get-the-uuid-of-the-existing-auto-prune-policy-for-the-current-user)
      * [Set the auto-prune policy for the current user](#set-the-auto-prune-policy-for-the-current-user)
      * [Modify the existing auto-prune policy for the current user](#modify-the-existing-auto-prune-policy-for-the-current-user)
      * [Delete the existing auto-prune policy for the current user](#delete-the-existing-auto-prune-policy-for-the-current-user)
-   * [Repository auto-prune policy](#repository-auto-prune-policy)
+   * [Auto-prune policy for Repositories](#auto-prune-policy-repositories)
      * [List the current auto-prune policy for repository `$repo` within the organization `$orga`](#list-the-current-auto-prune-policy-for-repository-repo-within-the-organization-orga)
      * [Get the uuid of the existing auto-prune policy for repository `$repo` within the organization `$orga`](#get-the-uuid-of-the-existing-auto-prune-policy-for-repository-repo-within-the-organization-orga)
      * [Set the auto-prune policy for repository `$repo` within the organization `$orga`](#set-the-auto-prune-policy-for-repository-repo-within-the-organization-orga)
@@ -258,7 +258,7 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token} https://${quay_registry
 ```
 Success is HTTP`204`
 
-## Organization auto-prune policy (Namespaces)
+## Auto-prune policy for organizations (Namespaces)
 > Auto-pruning policies for organizations are available since quay `v3.10.0`
 > 
 > Auto-pruning policies work at the organization level and apply to **all** repositories of this organization.
@@ -355,7 +355,7 @@ Success is HTTP `200`, no success is HTTP `404`
 
 A successful deletion will return the deleted uuid. E.g. `{"uuid": "cb44b3b7-bca6-42e4-8eaf-4350f09b5a63"}`
 
-## User auto-prune policy (Current user)
+## Auto-prune policy for User (Current user)
 > Auto-pruning policies for the current user are available since quay `v3.10.0`
 >
 > **The current user is the user who created the bearer token in use.**
@@ -451,7 +451,7 @@ Success is HTTP `200`, no success is HTTP `404`
 
 A successful deletion will return the deleted uuid. E.g. `{"uuid": "cb44b3b7-bca6-42e4-8eaf-4350f09b5a63"}`
 
-## Repository auto-prune policy
+## Auto-prune policy for Repositories
 > Auto-pruning policies for repositories are available since quay `v3.11.0`
 > 
 > Auto-pruning policies on the repository level work for organizations and users in the same way. Use for user repositories the user name as ${orga}!
