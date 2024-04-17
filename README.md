@@ -1253,6 +1253,7 @@ Success is HTTP `200`
 
 ### Delete an existing OAuth 2 access token for the current user
 > Token scope: *`user:admin`*
+
 Get `${token_uuid}` by querying the authorizations
 ```
 curl -X DELETE \
