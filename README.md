@@ -1237,6 +1237,7 @@ Success is HTTP `200`, no success because orgs does not exist is HTTP `404`, no 
 
 ## OAuth 2 access token (Authorizations)
 ### List all existing OAuth 2 access tokens for the current user
+> Token scope: *`user:admin`*
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
