@@ -69,7 +69,14 @@ Table of contents
       * [Reset the expiration date to `Never` (delete the expiration date) of tag `$tag` in reopsitory `$repo` within organization `$orga`](#reset-the-expiration-date-to-never-delete-the-expiration-date-of-tag-tag-in-reopsitory-repo-within-organization-orga)
       * [Delete tag `$tag` in repository `$repo` within organization `$orga`](#delete-tag-tag-in-repository-repo-within-organization-orga)
    * [Teams](#teams)
+   * [Current user](#current-user)
+      * [Get info about the current user](#get-info-about-the-current-user)
+      * [Verify the password of the current user](#verify-the-password-of-the-current-user)
    * [Users](#users)
+      * [Get all existing users](#get-all-existing-users)
+      * [Create an user `${user}` with email `${email}`](#create-an-user-user-with-email-email)
+      * [Get user information of user `$user`](#get-user-information-of-user-user)
+      * [Delete the user $user and all repositories owned by the user](#delete-the-user-user-and-all-repositories-owned-by-the-user)
    * [OrgRobots](#orgrobots)
    * [UserRobots](#userrobots-needs-to-be-reviewed)
    * [Quotas](#quotas)
@@ -982,18 +989,10 @@ curl -X DELETE \
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/organization/${orga}/team/${team}/syncing | jq
 ```
 success is HTTP `200`
-## Users
-### Get all existing users
-Works only if quay is configured with `AUTHENTICATION_TYPE: database` or `AUTHENTICATION_TYPE: LDAP`
-```
-curl -X GET \
-     -H "Authorization: Bearer ${bearer_token}" \
-     https://${quay_registry}/api/v1/superuser/users/ | jq
-```
-```
-curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/users/ | jq
-```
-### Get info about the currently logged in user
+
+## Current User
+> The current user is the user who created the used bearer_token
+### Get info about the current user
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -1019,20 +1018,34 @@ curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: applic
 ```
 Success is HTTP `200`, invalid credential is HTTP `403`
 
-### Create a user `abc` with email `abc@abc.com`
+## Users
+### Get all existing users
+> Existing users are users created if quay is configured with `AUTHENTICATION_TYPE: database`
+> or has logged in successfully at least once if quay is configured with `AUTHENTICATION_TYPE: LDAP`
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/superuser/users/ | jq
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/users/ | jq
+```
+Success is HTTP `200`
+
+### Create an user `${user}` with email `${email}`
 Works only if quay is configured with `AUTHENTICATION_TYPE: database`
 ```
 curl -X POST \
      -H "Authorization: Bearer ${bearer_token}" \
      -H "Content-Type: application/json" \
      --data '{\
-              "username": "abc", \
-              "email": "abc@abc.com"\
+              "username": "'${user}'", \
+              "email": "'${email}'"\
              }' \
      https://${quay_registry}/api/v1/superuser/users/ | jq
 ```
 ```
-curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"username": "abc", "email": "abc@abc.com"}' https://${quay_registry}/api/v1/superuser/users/ | jq
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"username": "'${user}'", "email": "'${email}'"}' https://${quay_registry}/api/v1/superuser/users/ | jq
 ```
 Success is HTTP `200`, user already exists or email is already in use is HTTP `400`
 
@@ -1047,7 +1060,7 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/
 ```
 Success is HTTP `200`, no success is HTTP `404`
 
-### Delete user `$user` and all repositories owned by the user
+### Delete the user `$user` and all repositories owned by the user
 Superusers can't be deleted! 
 ```
 curl -X DELETE \
