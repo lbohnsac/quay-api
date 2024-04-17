@@ -638,7 +638,7 @@ curl -X GET \
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror | jq
 ```
 Success is HTTP `200`, no success is HTTP `404` if there's no mirror config
-### Create a a mirror config for the mirrored repository `$repo` within the organization `$orga` (quay.io/minio/mc:latest)
+### Create a mirror config for the mirrored repository `$repo` within the organization `$orga` (quay.io/minio/mc:latest)
 The used robot `orga+robot` must already exist!
 
 Required values to provide are
@@ -1003,6 +1003,22 @@ curl -X GET \
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/user/ | jq
 ```
 Success is HTTP `200`
+
+### Verify the password of the current user
+```
+curl -X POST \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "password": "'${password}'"
+             }' \
+     https://${quay_registry}/api/v1/signin/verify | jq
+```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"password": "'${password}'"}' https://${quay_registry}/api/v1/signin/verify | jq
+```
+Success is HTTP `200`, invalid credential is HTTP `403`
+
 ### Create a user `abc` with email `abc@abc.com`
 Works only if quay is configured with `AUTHENTICATION_TYPE: database`
 ```
@@ -1019,6 +1035,7 @@ curl -X POST \
 curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"username": "abc", "email": "abc@abc.com"}' https://${quay_registry}/api/v1/superuser/users/ | jq
 ```
 Success is HTTP `200`, user already exists or email is already in use is HTTP `400`
+
 ### Get user information of user `$user`
 ```
 curl -X GET \
