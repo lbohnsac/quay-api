@@ -1297,6 +1297,6 @@ curl -X DELETE \
      https://${quay_registry}/api/v1/user/authorizations/${token_uuid} | jq
 ```
 ```
-curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/user/authorizations/${token_uuid} | jq
+curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/user/authorizations/${token_uuid} | jq
 ```
 Success is HTTP `204`
