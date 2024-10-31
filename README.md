@@ -32,6 +32,8 @@ Table of contents
      * [Create a permission prototype for user `$user` to `write`](#create-a-permission-prototype-for-user-user-to-write)
      * [Create a permission prototype for robot `$robot` to `read`](#create-a-permission-prototype-for-robot-robot-to-read)
      * [Delete a prototype permission](#delete-a-prototype-permission)
+   * [Auto-prune policy registry-wide](#auto-prune-policy-registry-wide)
+     * [List the current registry-wide auto-prune policy](#list-the-current-registry-wide-auto-prune-policy)
    * [Auto-prune policy for organizations (Namespaces)](#auto-prune-policy-for-organizations-namespaces)
      * [List the current auto-prune policy for organization `$orga`](#list-the-current-auto-prune-policy-for-organization-orga)
      * [Get the uuid of the existing auto-prune policy for organization `$orga`](#get-the-uuid-of-the-existing-auto-prune-policy-for-organization-orga)
@@ -277,6 +279,22 @@ curl -X DELETE \
 curl -X DELETE -H "Authorization: Bearer ${bearer_token} https://${quay_registry}/api/v1/organization/${orga}/prototypes/${prototypes_id} | jq
 ```
 Success is HTTP`204`
+
+## Auto-prune policy registry-wide
+> Auto-pruning policiy registry-wide is available since quay `v3.12.0`
+>
+> The registry-wide auto-prune policy works to **all** organizations and repository as a default policy.
+>
+> There can only be one policy at a time.
+>
+> The registry-wide auto-prune policy is defined in the config.yaml with the config field `DEFAULT_NAMESPACE_AUTOPRUNE_POLICY` and can only be changed there.
+>
+> **A change requires a restart of Quay!**
+
+### List the current registry-wide auto-prune policy
+```
+curl https://${quay_registry}/config | jq '.config.DEFAULT_NAMESPACE_AUTOPRUNBE_POLICY'
+```
 
 ## Auto-prune policy for organizations (Namespaces)
 > Auto-pruning policies for organizations are available since quay `v3.10.0`
