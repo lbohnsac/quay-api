@@ -101,7 +101,7 @@ Table of contents
    * [UserRobots](#userrobots-needs-to-be-reviewed)
    * [Quotas](#quotas)
        * [List quota of organization `$orga`](#list-quota-of-organization-orga)
-       * [Create a quota of 100MB for organization `$orga`](#create-a-quota-of-100mb-for-organization-orga)
+       * [Create a quota of 100MiB for organization `$orga`](#create-a-quota-of-100mib-for-organization-orga)
        * [Delete quota id 1 for organization `$orga`](#delete-quota-id-1-for-organization-orga)
    * [Take ownership](#take-ownership)
        * [Take the ownership of organization `$orga`]([#take-the-ownership-of-organization-orga)
@@ -1232,8 +1232,8 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: applica
 ```
 
 Success is HTTP `200`, no success is HTTP `404`
-### Create a quota of 100MB for organization `$orga`
-> *100MB = 104857600 bytes*
+### Create a quota of 100MiB for organization `$orga`
+> *100MiB = 104857600 bytes*
 ```
 curl -X POST \
      -H "Authorization: Bearer ${bearer_token}" \
