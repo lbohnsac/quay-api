@@ -287,7 +287,7 @@ curl -X DELETE -H "Authorization: Bearer ${bearer_token} https://${quay_registry
 Success is HTTP`204`
 
 ## Auto-prune policy registry-wide
-> Auto-pruning policiy registry-wide is available since quay `v3.12.0`
+> Auto-pruning policy registry-wide is available since quay `v3.12.0`
 >
 > The registry-wide auto-prune policy works to **all** organizations and repository as a default policy.
 >
