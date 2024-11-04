@@ -13,6 +13,7 @@ export manifest_digest=MANIFEST_DIGEST
 export team=TEAM_NAME
 export user=USER_NAME
 export robot=ROBOT_SHORT_NAME
+export quota_id=QUOTA_ID
 ```
 
 ***Tested with quay version 3.11.0***
@@ -100,9 +101,10 @@ Table of contents
       * [Delete the orgrobot $robot within the organization $orga](#delete-the-orgrobot-robot-within-the-organization-orga)
    * [UserRobots](#userrobots-needs-to-be-reviewed)
    * [Quotas](#quotas)
-       * [List quota of organization `$orga`](#list-quota-of-organization-orga)
+       * [List the current quota of organization `$orga`](#list-the-current-quota-of-organization-orga)
        * [Create a quota of 100MiB for organization `$orga`](#create-a-quota-of-100mib-for-organization-orga)
-       * [Delete quota id 1 for organization `$orga`](#delete-quota-id-1-for-organization-orga)
+       * [Modify the existing quota for organization `orga` to 200MiB](#modify-the-existing-quota-for-organization-orga-to-200mib)
+       * [Delete the existing quota for organization `$orga`](#delete-the-existing-quota-for-organization-orga)
    * [Take ownership](#take-ownership)
        * [Take the ownership of organization `$orga`]([#take-the-ownership-of-organization-orga)
    * [OAuth 2 access token (Authorizations)](#oauth-2-access-token-authorizations)
@@ -1221,7 +1223,7 @@ Success is HTTP `204`, no success is HTTP `400`
 
 
 ## Quotas
-### List quota of organization `$orga`
+### List the current quota of organization `$orga`
 ```
 curl -X GET \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -1229,6 +1231,17 @@ curl -X GET \
 ```
 ```
 curl -X GET -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/organization/${orga}/quota | jq
+```
+
+Success is HTTP `200`, no success is HTTP `404`
+### Get the quota id of the existing organization quota
+```
+curl -X GET \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/organization/${orga}/quota | jq -r '.[].id'
+```
+```
+curl -X GET -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/organization/${orga}/quota | jq -r '.[].id'
 ```
 
 Success is HTTP `200`, no success is HTTP `404`
@@ -1247,14 +1260,30 @@ curl -X POST \
 curl -X POST -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' --data '{"limit_bytes": 104857600}' https://${quay_registry}/api/v1/organization/${orga}/quota | jq
 ```
 Success is HTTP `201`, no success is HTTP `400`
-### Delete quota id 1 for organization `$orga`
+### Modify the existing quota for organization `orga` to 200MiB
+> First, get the current id (${quota_id}) to delete it
+```
+curl -X PUT \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H 'Content-Type: application/json' \
+     --data '{\
+             "limit_bytes": 209715200\
+            }' \
+     https://${quay_registry}/api/v1/organization/${orga}/quota/${quota_id} | jq
+```
+```
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' --data '{"limit_bytes": 209715200}' https://${quay_registry}/api/v1/organization/${orga}/quota/${quota_id} | jq
+```
+Success is HTTP `201`, no success is HTTP `400`
+### Delete the existing quota for organization `$orga`
+> First, get the current id (${quota_id}) to delete it
 ```
 curl -X DELETE \
      -H "Authorization: Bearer ${bearer_token}" \
-     https://${quay_registry}/api/v1/organization/${orga}/quota/1 | jq
+     https://${quay_registry}/api/v1/organization/${orga}/quota/${quota_id} | jq
 ```
 ```
-curl -X DELETE -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/organization/${orga}/quota/1 | jq
+curl -X DELETE -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/organization/${orga}/quota/${quota_id} | jq
 ```
 Success is HTTP `204`, no success is HTTP `400`
 
