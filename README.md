@@ -102,8 +102,10 @@ Table of contents
    * [UserRobots](#userrobots-needs-to-be-reviewed)
    * [Quotas](#quotas)
        * [List the current quota of organization `$orga`](#list-the-current-quota-of-organization-orga)
-       * [Create a quota of 100MiB for organization `$orga`](#create-a-quota-of-100mib-for-organization-orga)
-       * [Modify the existing quota for organization `orga` to 200MiB](#modify-the-existing-quota-for-organization-orga-to-200mib)
+       * [Create a quota of 100MiB for organization `$orga` using `limit_bytes`](#create-a-quota-of-100mib-for-organization-orga-using-limit_bytes)
+       * [Create a quota of 100MiB for organization `$orga` using `limit`](#create-a-quota-of-100mib-for-organization-orga-using-limit)
+       * [Modify the existing quota for organization `orga` to 200MiB using `limit_bytes`](#modify-the-existing-quota-for-organization-orga-to-200mib-using-limit_bytes)
+       * [Modify the existing quota for organization `orga` to 200MiB using `limit`](#modify-the-existing-quota-for-organization-orga-to-200mib-using-limit)
        * [Delete the existing quota for organization `$orga`](#delete-the-existing-quota-for-organization-orga)
    * [Take ownership](#take-ownership)
        * [Take the ownership of organization `$orga`]([#take-the-ownership-of-organization-orga)
@@ -1245,8 +1247,8 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: applica
 ```
 
 Success is HTTP `200`, no success is HTTP `404`
-### Create a quota of 100MiB for organization `$orga`
-> *100MiB = 104857600 bytes*
+### Create a quota of 100MiB for organization `$orga` using `limit_bytes`
+> *100 MiB = 104857600 bytes*
 ```
 curl -X POST \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -1260,8 +1262,28 @@ curl -X POST \
 curl -X POST -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' --data '{"limit_bytes": 104857600}' https://${quay_registry}/api/v1/organization/${orga}/quota | jq
 ```
 Success is HTTP `201`, no success is HTTP `400`
-### Modify the existing quota for organization `orga` to 200MiB
-> First, get the current id (${quota_id}) to delete it
+### Create a quota of 100MiB for organization `$orga` using `limit`
+> The name `limit` is available since Quay 3.12.0
+> 
+> Valid units are `K`|`M`|`G`|`T`|`P`|`E`|`KB`|`MB`|`GB`|`TB`|`PB`|`EB`| and `Ki`|`Mi`|`Gi`|`Ti`|`Pi`|`Ei`|`KiB`|`MiB`|`GiB`|`TiB`|`PiB`|`EiB`
+>
+> Caution 100 MB => 95.4 MiB
+> 
+> Only integers are allowed to set, no floats!
+```
+curl -X POST \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H 'Content-Type: application/json' \
+     --data '{\
+             "limit": "100 MiB"\
+            }' \
+     https://${quay_registry}/api/v1/organization/${orga}/quota | jq
+```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' --data '{"limit": "100 MiB"}' https://${quay_registry}/api/v1/organization/${orga}/quota | jq
+```
+Success is HTTP `201`, no success is HTTP `400`
+### Modify the existing quota for organization `orga` to 200MiB using `limit_bytes`
 ```
 curl -X PUT \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -1273,6 +1295,26 @@ curl -X PUT \
 ```
 ```
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' --data '{"limit_bytes": 209715200}' https://${quay_registry}/api/v1/organization/${orga}/quota/${quota_id} | jq
+```
+### Modify the existing quota for organization `orga` to 200MiB using `limit`
+> The name `limit` is available since Quay 3.12.0
+> 
+> Valid units are `K`|`M`|`G`|`T`|`P`|`E`|`KB`|`MB`|`GB`|`TB`|`PB`|`EB`| and `Ki`|`Mi`|`Gi`|`Ti`|`Pi`|`Ei`|`KiB`|`MiB`|`GiB`|`TiB`|`PiB`|`EiB`
+>
+> Caution 100 MB => 95.4 MiB
+> 
+> Only integers are allowed to set, no floats!
+```
+curl -X PUT \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H 'Content-Type: application/json' \
+     --data '{\
+             "limit": "100 MiB"\
+            }' \
+     https://${quay_registry}/api/v1/organization/${orga}/quota/${quota_id} | jq
+```
+```
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' --data '{"limit": "100 MiB"}' https://${quay_registry}/api/v1/organization/${orga}/quota/${quota_id} | jq
 ```
 Success is HTTP `201`, no success is HTTP `400`
 ### Delete the existing quota for organization `$orga`
