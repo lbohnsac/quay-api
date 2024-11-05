@@ -1265,7 +1265,13 @@ Success is HTTP `201`, no success is HTTP `400`
 ### Create a quota of 100MiB for organization `$orga` using `limit`
 > The name `limit` is available since Quay 3.12.0
 > 
-> Valid units are `K`|`M`|`G`|`T`|`P`|`E`|`KB`|`MB`|`GB`|`TB`|`PB`|`EB`| and `Ki`|`Mi`|`Gi`|`Ti`|`Pi`|`Ei`|`KiB`|`MiB`|`GiB`|`TiB`|`PiB`|`EiB`
+> Valid units are
+> 
+> `K`|`M`|`G`|`T`|`P`|`E`|`KB`|`MB`|`GB`|`TB`|`PB`|`EB` (power-of-10)   1 Kilobyte = 1 KB = 10^3 = 1000 Bytes)
+> 
+> and
+> 
+> `Ki`|`Mi`|`Gi`|`Ti`|`Pi`|`Ei`|`KiB`|`MiB`|`GiB`|`TiB`|`PiB`|`EiB` (power-of-2)   1 Kibibyte= 1 KiB = 2^10 = 1024 Bytes)
 >
 > Caution 100 MB => 95.4 MiB
 > 
@@ -1296,10 +1302,17 @@ curl -X PUT \
 ```
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' --data '{"limit_bytes": 209715200}' https://${quay_registry}/api/v1/organization/${orga}/quota/${quota_id} | jq
 ```
+Success is HTTP `204`, no success is HTTP `404`
 ### Modify the existing quota for organization `orga` to 200MiB using `limit`
 > The name `limit` is available since Quay 3.12.0
 > 
-> Valid units are `K`|`M`|`G`|`T`|`P`|`E`|`KB`|`MB`|`GB`|`TB`|`PB`|`EB`| and `Ki`|`Mi`|`Gi`|`Ti`|`Pi`|`Ei`|`KiB`|`MiB`|`GiB`|`TiB`|`PiB`|`EiB`
+> Valid units are
+> 
+> `K`|`M`|`G`|`T`|`P`|`E`|`KB`|`MB`|`GB`|`TB`|`PB`|`EB` (power-of-10)   1 Kilobyte = 1 KB = 10^3 = 1000 Bytes)
+> 
+> and
+> 
+> `Ki`|`Mi`|`Gi`|`Ti`|`Pi`|`Ei`|`KiB`|`MiB`|`GiB`|`TiB`|`PiB`|`EiB` (power-of-2)   1 Kibibyte= 1 KiB = 2^10 = 1024 Bytes)
 >
 > Caution 100 MB => 95.4 MiB
 > 
@@ -1316,7 +1329,7 @@ curl -X PUT \
 ```
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' --data '{"limit": "100 MiB"}' https://${quay_registry}/api/v1/organization/${orga}/quota/${quota_id} | jq
 ```
-Success is HTTP `201`, no success is HTTP `400`
+Success is HTTP `200`, no success is HTTP `400`
 ### Delete the existing quota for organization `$orga`
 > First, get the current id (${quota_id}) to delete it
 ```
@@ -1327,7 +1340,7 @@ curl -X DELETE \
 ```
 curl -X DELETE -H "Authorization: Bearer ${bearer_token}" -H 'Content-Type: application/json' https://${quay_registry}/api/v1/organization/${orga}/quota/${quota_id} | jq
 ```
-Success is HTTP `204`, no success is HTTP `400`
+Success is HTTP `204`, no success is HTTP `404`
 
 
 ## Take ownership
