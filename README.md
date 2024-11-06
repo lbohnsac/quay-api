@@ -126,6 +126,11 @@ curl -X GET \
 curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/superuser/organizations/ | jq
 ```
 ### Create the organization `$orga`
+> Setting email is optional!
+>
+> The email has to be unique registry-wide!
+>
+> If not set a random uuid in the format `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` will be stored
 ```
 curl -X POST \
      -H "Authorization: Bearer ${bearer_token}" \
@@ -137,9 +142,27 @@ curl -X POST \
      https://${quay_registry}/api/v1/organization/ | jq
 ```
 ```
-curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"name": "${orga}"}, "email": "${email}"' https://${quay_registry}/api/v1/organization/ | jq
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"name": "${orga}"}, "email": "${email}"}' https://${quay_registry}/api/v1/organization/ | jq
 ```
 Success is HTTP `201`
+### Set or modify email info for existing organization `orga`
+> The email has to be unique registry-wide!
+>
+> To delete an existing email overwrite it with a random uuid in the format `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+>
+> `python -m uuid` will do the trick!
+```
+curl -X PUT \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "email": "${email}" \
+             }' \
+     https://${quay_registry}/api/v1/organization/${orga} | jq
+```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"email": "${email}"}' https://${quay_registry}/api/v1/organization/${orga} | jq
+```
 ### Get the details for the organization `$orga`
 > Token scope: *`super:user` or `org:admin` or `repo:create`*
 ```
