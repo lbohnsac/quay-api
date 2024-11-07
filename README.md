@@ -24,6 +24,7 @@ Table of contents
    * [Organizations](#organizations-namespaces)
      * [List all existing `organizations`](#list-all-existing-organizations)
      * [Create the organization `$orga`](#create-the-organization-orga)
+     * [Set or modify email info for existing organization `orga`](#set-or-modify-email-info-for-existing-organization-orga)
      * [Get the details for the organization `$orga`](#get-the-details-for-the-organization-orga)
      * [List the applications for the organization `$orga`](#list-the-applications-for-the-organization-orga)
      * [Delete the organization `$orga`](#delete-the-organization-orga)
@@ -161,7 +162,7 @@ curl -X PUT \
      https://${quay_registry}/api/v1/organization/${orga} | jq
 ```
 ```
-curl -X POST -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"email": "${email}"}' https://${quay_registry}/api/v1/organization/${orga} | jq
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"email": "${email}"}' https://${quay_registry}/api/v1/organization/${orga} | jq
 ```
 ### Get the details for the organization `$orga`
 > Token scope: *`super:user` or `org:admin` or `repo:create`*
