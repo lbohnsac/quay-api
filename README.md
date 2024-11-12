@@ -327,7 +327,7 @@ Success is HTTP`204`
 
 ### List the current registry-wide auto-prune policy
 ```
-curl https://${quay_registry}/config | jq '.config.DEFAULT_NAMESPACE_AUTOPRUNBE_POLICY'
+curl https://${quay_registry}/config | jq '.config.DEFAULT_NAMESPACE_AUTOPRUNE_POLICY'
 ```
 
 ## Auto-prune policy for organizations (Namespaces)
