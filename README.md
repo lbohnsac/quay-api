@@ -157,12 +157,12 @@ curl -X PUT \
      -H "Authorization: Bearer ${bearer_token}" \
      -H "Content-Type: application/json" \
      --data '{\
-              "email": "${email}" \
+              "email": "'${email}'" \
              }' \
      https://${quay_registry}/api/v1/organization/${orga} | jq
 ```
 ```
-curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"email": "${email}"}' https://${quay_registry}/api/v1/organization/${orga} | jq
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"email": "'${email}'"}' https://${quay_registry}/api/v1/organization/${orga} | jq
 ```
 Success is HTTP `200`, no success is HTTP `400`
 ### Get the details for the organization `$orga`
