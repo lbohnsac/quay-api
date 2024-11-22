@@ -60,6 +60,7 @@ Table of contents
      * [Create the repository `$repo` in organization `$orga`](#create-the-repository-repo-in-organization-orga)
      * [Change the visibility of the repository `$repo` within the organization `$orga` to `public`](#change-the-visibility-of-the-repository-repo-within-the-organization-orga-to-public)
      * [Change the repository state to `Readonly` for repository `$repo` within the organization `$orga`](#change-the-repository-state-to-readonly-for-repository-repo-within-the-organization-orga)
+     * [Delete the repository `$repo` within the organization `$orga`](#delete-the-repository-repo-within-the-organization-orga)
    * [Mirrored repositories](#mirrored-repositories-needs-to-be-reviewed)
       * [Get the existing mirror config from the repository `$repo` within the organization `$orga`](#get-the-existing-mirror-config-from-the-repository-repo-within-the-organization-orga)
       * [Create a a mirror config for the mirrored repository `$repo` within the organization `$orga` (quay.io/minio/mc:latest)](https://github.com/lbohnsac/quay-api?tab=readme-ov-file#create-a-a-mirror-config-for-the-mirrored-repository-repo-within-the-organization-orga-quayiominiomclatest)
@@ -649,7 +650,7 @@ curl -X POST \
               "repository": "'$repo'", \
               "visibility": "public", \
               "description": "", \
-              "repo_kind": "image"              
+              "repo_kind": "image" \
              }' \
      https://${quay_registry}/api/v1/repository | jq
 ```
@@ -698,7 +699,17 @@ curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: applica
 Success is HTTP `200`
 
 Valid values are `NORMAL`, `READ_ONLY` and `MIRROR`... take care it's case sensitive!
-
+### Delete the repository `$repo` within the organization `$orga`
+```
+curl -X DELETE \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     https://${quay_registry}/api/v1/repository/${orga}/${repo} | jq
+```
+```
+curl -X DELETE -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" https://${quay_registry}/api/v1/repository/${orga}/${repo} | jq
+```
+Success is HTTP `204` (even if `$repo` does not exist!), no success is HTTP `500` (only if `$orga` does not exist!)
 
 ## Mirrored repositories (needs to be reviewed!)
 ### Get the existing mirror config from the repository `$repo` within the organization `$orga`
