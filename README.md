@@ -110,7 +110,7 @@ Table of contents
        * [Modify the existing quota for organization `orga` to 200MiB using `limit`](#modify-the-existing-quota-for-organization-orga-to-200mib-using-limit)
        * [Delete the existing quota for organization `$orga`](#delete-the-existing-quota-for-organization-orga)
    * [Take ownership](#take-ownership)
-       * [Take the ownership of organization `$orga`]([#take-the-ownership-of-organization-orga)
+       * [Take the ownership of organization `$orga`](#take-the-ownership-of-organization-orga)
    * [OAuth 2 access token (Authorizations)](#oauth-2-access-token-authorizations)
        * [List all existing OAuth 2 access tokens for the current user](#list-all-existing-oauth-2-access-tokens-for-the-current-user)
        * [Delete an existing OAuth 2 access token for the current user](#delete-an-existing-oauth-2-access-token-for-the-current-user)
