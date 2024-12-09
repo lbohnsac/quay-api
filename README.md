@@ -66,6 +66,7 @@ Table of contents
       * [Create a a mirror config for the mirrored repository `$repo` within the organization `$orga` (quay.io/minio/mc:latest)](https://github.com/lbohnsac/quay-api?tab=readme-ov-file#create-a-a-mirror-config-for-the-mirrored-repository-repo-within-the-organization-orga-quayiominiomclatest)
       * [Update a part of the mirror config of the mirrored repository `$repo` within the organization `$orga` (quay.io/minio/mc:latest)](#update-a-part-of-the-mirror-config-of-the-mirrored-repository-repo-within-the-organization-orga-quayiominiomclatest)
       * [Initiate a mirror sync action of the mirrored repository `$repo` within the organization `$orga`](https://github.com/lbohnsac/quay-api?tab=readme-ov-file#initiate-a-mirror-sync-action-of-the-mirrored-repository-repo-within-the-organization-orga)
+      * [Cancel a mirror sync action of the mirrored repository `$repo` within the organization `$orga`](#cancel-a-mirror-sync-action-of-the-mirrored-repository-repo-within-the-organization-orga)
    * [Tags](#tags)
       * [List all tags in repository `$repo` within organization `$orga`](#list-all-tags-in-repository-repo-within-organization-orga)
       * [List all ***active*** tags in repository `$repo` within organization `$orga`](#list-all-active-tags-in-repository-repo-within-organization-orga)
