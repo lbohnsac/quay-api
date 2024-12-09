@@ -824,7 +824,17 @@ curl -X POST \
 ```
 curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror/sync-now | jq
 ```
-
+Success is HTTP `204`
+### Cancel a mirror sync action of the mirrored repository `$repo` within the organization `$orga`
+```
+curl -X POST \
+     -H "Authorization: Bearer ${bearer_token}" \
+     https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror/sync-cancel | jq
+```
+```
+curl -X POST -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/mirror/sync-cancel | jq
+```
+Success is HTTP `204`
 
 ## Tags
 ### List all tags in repository `$repo` within organization `$orga`
