@@ -1236,6 +1236,8 @@ curl -X PUT \
 curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"role": "admin"}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/user/${orga}+${robot} | jq
 ```
 Success is HTTP `200`, no success is HTTP `400`
+
+Valid values are `read`, `write` or `admin`
 ### Delete current permission for orgrobot `$robot` for repository `$repo` within the organization `$orga`
 ```
 curl -X DELETE \
