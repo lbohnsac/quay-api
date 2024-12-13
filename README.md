@@ -1230,10 +1230,10 @@ curl -X PUT \
      --data '{\
               "role": "admin" \
              }' \
-     https://${quay_registry}/api/v1/repository/${orga}/${repo}/user/${orga}+${robot} | jq
+     https://${quay_registry}/api/v1/repository/${orga}/${repo}/permissions/user/${orga}+${robot} | jq
 ```
 ```
-curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"role": "admin"}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/user/${orga}+${robot} | jq
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"role": "admin"}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/permissions/user/${orga}+${robot} | jq
 ```
 Success is HTTP `200`, no success is HTTP `400`
 
@@ -1242,10 +1242,10 @@ Valid values are `read`, `write` or `admin`
 ```
 curl -X DELETE \
      -H "Authorization: Bearer ${bearer_token}" \
-     https://${quay_registry}/api/v1/repository/${orga}/${repo}/user/${orga}+${robot} | jq
+     https://${quay_registry}/api/v1/repository/${orga}/${repo}/permissions/user/${orga}+${robot} | jq
 ```
 ```
-curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/user/${orga}+${robot} | jq
+curl -X DELETE -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/api/v1/repository/${orga}/${repo}/permissions/user/${orga}+${robot} | jq
 ```
 Success is HTTP `204`, no success is HTTP `400`
 ### Delete the orgrobot `$robot` within the organization `$orga`
