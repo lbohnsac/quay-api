@@ -101,6 +101,7 @@ Table of contents
       * [List all existing orgrobots within the organization `$orga`](h#list-all-existing-orgrobots-within-the-organization-orga)
       * [Replace the current token of orgrobot `$robot` with a new token within the organization `$orga`](#replace-the-current-token-of-orgrobot-robot-with-a-new-token-within-the-organization-orga)
       * [Get the current permissions of orgrobot `$robot` within the organization `$orga`](#get-the-current-permissions-of-orgrobot-robot-within-the-organization-orga)
+      * [Set or replace current permission to `admin` for orgrobot `$robot` for repository `$repo` within the organization `$orga`](#set-or-replace-current-permission-to-admin-for-orgrobot-robot-for-repository-repo-within-the-organization-orga)
       * [Delete the orgrobot $robot within the organization $orga](#delete-the-orgrobot-robot-within-the-organization-orga)
    * [UserRobots](#userrobots-needs-to-be-reviewed)
    * [Quotas](#quotas)
@@ -1220,6 +1221,20 @@ curl -X GET -H "Authorization: Bearer ${bearer_token}" https://${quay_registry}/
 ```
 Success is HTTP `200`, no success is HTTP `400`
 
+### Set or replace current permission to `admin` for orgrobot `$robot` for repository `$repo` within the organization `$orga`
+```
+curl -X PUT \
+     -H "Authorization: Bearer ${bearer_token}" \
+     -H "Content-Type: application/json" \
+     --data '{\
+              "role": "admin" \
+             }' \
+     https://${quay_registry}/api/v1/repository/${orga}/${repo}/user/${orga}+${robot} | jq
+```
+```
+curl -X PUT -H "Authorization: Bearer ${bearer_token}" -H "Content-Type: application/json" --data '{"role": "admin"}' https://${quay_registry}/api/v1/repository/${orga}/${repo}/user/${orga}+${robot} | jq
+```
+Success is HTTP `200`, no success is HTTP `400`
 ### Delete the orgrobot `$robot` within the organization `$orga`
 ```
 curl -X DELETE \
